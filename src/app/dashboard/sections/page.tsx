@@ -87,7 +87,7 @@ export default function SectionsPage() {
                       : "bg-red-100 text-red-800"
                   }`}
                 >
-                  {section.active ? "Enabled" : "Disabled"}
+                  {section.active ? "Habilidado" : "Desabilitado"}
                 </span>
               </div>
               <Switch
