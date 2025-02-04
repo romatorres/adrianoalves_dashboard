@@ -1,0 +1,96 @@
+"use client";
+
+import { GalleryImage } from "../types";
+import { useState } from "react";
+import Image from "next/image";
+
+interface GalleryListProps {
+  images: GalleryImage[];
+  onEdit: (image: GalleryImage) => void;
+  onDelete: (id: string) => Promise<void>;
+}
+
+export function GalleryList({
+  images = [],
+  onEdit,
+  onDelete,
+}: GalleryListProps) {
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  const handleDelete = async (id: string) => {
+    if (confirm("Tem certeza que deseja excluir esta imagem?")) {
+      setDeletingId(id);
+      try {
+        await onDelete(id);
+      } catch (error) {
+        console.error("Error deleting image:", error);
+        alert("Erro ao excluir imagem");
+      } finally {
+        setDeletingId(null);
+      }
+    }
+  };
+
+  if (!images || images.length === 0) {
+    return (
+      <div className="text-center text-gray-500 py-8">
+        Nenhuma imagem encontrada
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {images.map((image) => (
+        <div
+          key={image.id}
+          className="relative bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"
+        >
+          <div className="relative h-48 w-full mb-4">
+            <Image
+              src={image.imageUrl}
+              alt={image.title || ""}
+              fill
+              className="rounded-lg object-cover"
+            />
+          </div>
+          <h3 className="text-lg font-medium text-gray-900">{image.title}</h3>
+          {image.description && (
+            <p className="mt-1 text-sm text-gray-500">{image.description}</p>
+          )}
+          <div className="mt-2 space-y-1">
+            {image.featured && (
+              <span className="text-xs text-amber-500">⭐ Destaque</span>
+            )}
+          </div>
+          <div className="mt-2">
+            <span
+              className={`inline-flex px-2 text-xs font-semibold rounded-full ${
+                image.active
+                  ? "bg-green-100 text-green-800"
+                  : "bg-red-100 text-red-800"
+              }`}
+            >
+              {image.active ? "Ativa" : "Inativa"}
+            </span>
+          </div>
+          <div className="mt-4 flex justify-end space-x-2">
+            <button
+              onClick={() => onEdit(image)}
+              className="text-amber-600 hover:text-amber-900"
+            >
+              Editar
+            </button>
+            <button
+              onClick={() => handleDelete(image.id)}
+              disabled={deletingId === image.id}
+              className="text-red-600 hover:text-red-900 disabled:opacity-50"
+            >
+              {deletingId === image.id ? "Excluindo..." : "Excluir"}
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
