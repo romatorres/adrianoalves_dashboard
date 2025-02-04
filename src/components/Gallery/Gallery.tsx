@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import Masonry from "react-masonry-css";
+import { ImageModal } from "../ImageModal/ImageModal";
 
 interface GalleryImage {
   id: string;
@@ -13,74 +13,81 @@ interface GalleryImage {
 
 interface GalleryProps {
   images: GalleryImage[];
+  isVisible?: boolean;
 }
 
-export function Gallery({ images = [] }: GalleryProps) {
-  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+export function Gallery({ images = [], isVisible = true }: GalleryProps) {
+  if (!isVisible) return null;
 
-  useEffect(() => {
-    // Reset loaded images when the images array changes
-    setLoadedImages(new Set());
-  }, [images]);
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null
+  );
 
   const handleImageLoad = (imageId: string) => {
-    setLoadedImages((prev) => {
-      const newSet = new Set(prev);
-      newSet.add(imageId);
-      return newSet;
-    });
+    setLoadedImages((prev) => new Set(prev).add(imageId));
   };
 
-  const allImagesLoaded = loadedImages.size === images.length;
+  const handleImageClick = (index: number) => {
+    setSelectedImageIndex(index);
+  };
 
-  if (!images || images.length === 0) {
-    return (
-      <section className="py-12 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8">Nossa Galeria</h2>
-          <p className="text-center text-gray-500">Nenhuma imagem disponível</p>
-        </div>
-      </section>
-    );
-  }
+  const handleCloseModal = () => {
+    setSelectedImageIndex(null);
+  };
 
-  const breakpointColumns = {
-    default: 3,
-    1024: 2,
-    640: 1,
+  const handleNextImage = () => {
+    if (selectedImageIndex !== null && selectedImageIndex < images.length - 1) {
+      setSelectedImageIndex(selectedImageIndex + 1);
+    }
+  };
+
+  const handlePreviousImage = () => {
+    if (selectedImageIndex !== null && selectedImageIndex > 0) {
+      setSelectedImageIndex(selectedImageIndex - 1);
+    }
   };
 
   return (
-    <section className="py-12 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-8">Nossa Galeria</h2>
-
-        {!allImagesLoaded && (
-          <div className="flex items-center justify-center min-h-[200px]">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+    <section id="galeria" className="py-12 md:py-16 lg:py-20 bg-white">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="mb-16 md:mb-20 flex flex-col items-center">
+          <h2 className="text-3xl md:text-6xl font-primary font-normal text-black_secondary mb-3">
+            Galeria
+          </h2>
+          <div className="relative w-[96px] h-[22px] md:w-[120px] md:h-[28px]">
+            <Image
+              src="/img/bigode.svg"
+              alt="Bigode abaixo do titulo Serviços"
+              fill
+              className="object-contain"
+            />
           </div>
-        )}
+        </div>
 
-        <div className={!allImagesLoaded ? "hidden" : ""}>
-          <Masonry
-            breakpointCols={breakpointColumns}
-            className="my-masonry-grid"
-            columnClassName="my-masonry-grid_column"
-          >
+        {!images || images.length === 0 ? (
+          <p className="text-center text-gray-500">Nenhuma imagem disponível</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[200px]">
             {images.map((image, index) => (
               <div
                 key={image.id}
-                className="mb-4 group overflow-hidden rounded-lg shadow-lg"
+                className="group overflow-hidden rounded-lg shadow-lg relative cursor-pointer"
+                onClick={() => handleImageClick(index)}
               >
-                <div className="relative">
+                {!loadedImages.has(image.id) && (
+                  <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg" />
+                )}
+                <div className="relative w-full h-full">
                   <Image
                     src={image.imageUrl}
                     alt={image.title || ""}
-                    width={800}
-                    height={600}
-                    className="w-full transition-transform duration-300 group-hover:scale-110"
-                    priority={index === 0}
-                    style={{ display: "block" }}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className={`object-cover transition-transform duration-300 group-hover:scale-110 ${
+                      loadedImages.has(image.id) ? "opacity-100" : "opacity-0"
+                    }`}
+                    priority={index < 3}
                     onLoad={() => handleImageLoad(image.id)}
                   />
                   {(image.title || image.description) && (
@@ -96,8 +103,18 @@ export function Gallery({ images = [] }: GalleryProps) {
                 </div>
               </div>
             ))}
-          </Masonry>
-        </div>
+          </div>
+        )}
+
+        {selectedImageIndex !== null && (
+          <ImageModal
+            images={images}
+            currentImageIndex={selectedImageIndex}
+            onClose={handleCloseModal}
+            onNext={handleNextImage}
+            onPrevious={handlePreviousImage}
+          />
+        )}
       </div>
     </section>
   );

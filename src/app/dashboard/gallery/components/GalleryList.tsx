@@ -3,6 +3,7 @@
 import { GalleryImage } from "../types";
 import { useState } from "react";
 import Image from "next/image";
+import { ImageModal } from "@/components/ImageModal/ImageModal";
 
 interface GalleryListProps {
   images: GalleryImage[];
@@ -16,6 +17,9 @@ export function GalleryList({
   onDelete,
 }: GalleryListProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(
+    null
+  );
 
   const handleDelete = async (id: string) => {
     if (confirm("Tem certeza que deseja excluir esta imagem?")) {
@@ -31,6 +35,10 @@ export function GalleryList({
     }
   };
 
+  const handleImageClick = (index: number) => {
+    setSelectedImageIndex(index);
+  };
+
   if (!images || images.length === 0) {
     return (
       <div className="text-center text-gray-500 py-8">
@@ -41,17 +49,23 @@ export function GalleryList({
 
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {images.map((image) => (
+      {images.map((image, index) => (
         <div
           key={image.id}
           className="relative bg-white p-4 rounded-lg shadow hover:shadow-md transition-shadow"
         >
-          <div className="relative h-48 w-full mb-4">
+          <div
+            className="relative aspect-[4/3] w-full mb-4 cursor-pointer"
+            onClick={() => handleImageClick(index)}
+          >
             <Image
               src={image.imageUrl}
               alt={image.title || ""}
               fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               className="rounded-lg object-cover"
+              priority={false}
+              loading="lazy"
             />
           </div>
           <h3 className="text-lg font-medium text-gray-900">{image.title}</h3>
@@ -91,6 +105,24 @@ export function GalleryList({
           </div>
         </div>
       ))}
+
+      {selectedImageIndex !== null && (
+        <ImageModal
+          images={images}
+          currentImageIndex={selectedImageIndex}
+          onClose={() => setSelectedImageIndex(null)}
+          onNext={() =>
+            setSelectedImageIndex((prev) =>
+              prev !== null && prev < images.length - 1 ? prev + 1 : prev
+            )
+          }
+          onPrevious={() =>
+            setSelectedImageIndex((prev) =>
+              prev !== null && prev > 0 ? prev - 1 : prev
+            )
+          }
+        />
+      )}
     </div>
   );
 }

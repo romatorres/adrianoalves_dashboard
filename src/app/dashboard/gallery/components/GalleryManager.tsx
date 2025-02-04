@@ -48,6 +48,12 @@ export function GalleryManager({ initialImages }: GalleryManagerProps) {
   const handleEdit = (image: GalleryImage) => {
     setSelectedImage(image);
     setShowForm(true);
+    setTimeout(() => {
+      document.getElementById("gallery-form")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100);
   };
 
   const handleDelete = async (id: string) => {
@@ -78,7 +84,10 @@ export function GalleryManager({ initialImages }: GalleryManagerProps) {
       </div>
 
       {showForm ? (
-        <div className="mb-8 bg-white p-6 rounded-lg shadow">
+        <div
+          id="gallery-form"
+          className="mb-8 bg-white p-6 rounded-lg shadow scroll-mt-4"
+        >
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-xl font-semibold">
               {selectedImage ? "Editar Imagem" : "Nova Imagem"}

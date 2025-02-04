@@ -1,16 +1,20 @@
 export interface GalleryImage {
   id: string;
-  title: string | null;
-  imageUrl: string;
+  title: string;
   description: string | null;
-  featured?: boolean;
-  active?: boolean;
+  imageUrl: string;
+  featured: boolean;
+  active: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface GalleryImageFormData {
-  title?: string;
+  title: string;
+  description?: string | null;
   imageUrl: string;
-  description?: string;
+  featured: boolean;
+  active: boolean;
 }
 
 export interface GalleryResponse {

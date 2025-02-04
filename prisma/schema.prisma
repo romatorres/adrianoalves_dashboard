@@ -107,3 +107,10 @@ model Team {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
+
+model SectionVisibility {
+  id        String   @id @default(cuid())
+  name      String   @unique // 'gallery', 'products', 'promotions', 'services', 'team'
+  active    Boolean  @default(true)
+  updatedAt DateTime @updatedAt
+}

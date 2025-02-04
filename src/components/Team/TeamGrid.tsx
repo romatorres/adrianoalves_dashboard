@@ -6,9 +6,11 @@ import { useSession } from "next-auth/react";
  */
 interface TeamGridProps {
   members: TeamMemberType[];
+  isVisible?: boolean;
 }
 
-const TeamGrid = ({ members }: TeamGridProps) => {
+const TeamGrid = ({ members, isVisible = true }: TeamGridProps) => {
+  if (!isVisible) return null;
   /* const { data: session } = useSession();
   const isAdmin = session?.user?.role === "ADMIN"; */
 

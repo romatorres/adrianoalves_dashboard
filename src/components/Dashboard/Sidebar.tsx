@@ -20,6 +20,7 @@ import {
   LogOut,
   Scissors,
   LucideIcon,
+  SectionIcon,
 } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { UserImageUpload } from "./UserImageUpload";
@@ -49,6 +50,11 @@ const menuItems: MenuItem[] = [
   { name: "Galeria", href: "/dashboard/gallery", icon: ImageIcon },
   { name: "Equipe", href: "/dashboard/team", icon: Users },
   { name: "Promoções", href: "/dashboard/promotions", icon: Tag },
+  {
+    name: "Gerenciar Seções",
+    href: "/dashboard/sections",
+    icon: SectionIcon, // Podemos usar um ícone apropriado
+  },
   {
     name: "Configurações",
     icon: Settings,

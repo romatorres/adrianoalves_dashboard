@@ -19,29 +19,28 @@ export function ProductCard({ product }: { product: Product }) {
   }).format(product.price);
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="relative h-64">
-        <Image
-          src={product.imageUrl}
-          alt={product.name}
-          fill
-          className="object-cover"
-        />
-      </div>
-      <div className="p-4">
-        <p className="text-sm text-gray-500">
-          {product.productCategory?.name || "Sem Categoria"}
-        </p>
-        <h3 className="text-xl font-bold mb-2">{product.name}</h3>
-        <p className="text-gray-600 mb-4 line-clamp-2">{product.description}</p>
-        <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold text-amber-600">
-            {formattedPrice}
-          </span>
-          <button className="bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 transition-colors">
-            Comprar
-          </button>
+    <div className="max-w-xs rounded overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 bg-white">
+      <div className="p-2">
+        <div className="relative h-56">
+          <Image
+            src={product.imageUrl}
+            alt={product.name}
+            fill
+            className="object-cover rounded-lg"
+          />
         </div>
+      </div>
+      <div className="px-6 py-4">
+        <div className="font-bold text-xl mb-2">{product.name}</div>
+        <p className="text-gray-700 text-base">{product.description}</p>
+      </div>
+      <div className="flex justify-between items-center px-6 pt-4 pb-3">
+        <span className="inline-block text-2xl font-bold text-background">
+          {formattedPrice}
+        </span>
+        <button className="bg-primary hover:bg-black_secondary text-background hover:text-white text-sm py-2 px-4 rounded-full transition-colors duration-300">
+          Consultar
+        </button>
       </div>
     </div>
   );

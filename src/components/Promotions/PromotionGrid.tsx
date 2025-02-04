@@ -4,9 +4,14 @@ import Image from "next/image";
 
 interface PromotionGridProps {
   promotions: Promotion[];
+  isVisible?: boolean;
 }
 
-export function PromotionGrid({ promotions }: PromotionGridProps) {
+export function PromotionGrid({
+  promotions,
+  isVisible = true,
+}: PromotionGridProps) {
+  if (!isVisible) return null;
   return (
     <section className="py-12 md:py-16 bg-service bg-cover bg-center bg-no-repeat">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">

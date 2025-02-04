@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/prisma";
 import { Product } from "@/components/Shop/types";
-import { Decimal } from "@prisma/client/runtime/library";
 
 export async function getProducts(): Promise<Product[]> {
   const products = await prisma.product.findMany({
@@ -13,33 +12,33 @@ export async function getProducts(): Promise<Product[]> {
         },
       },
     },
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
   });
 
-  return products.map(product => ({
+  return products.map((product) => ({
     ...product,
-    price: Number(product.price)
+    price: Number(product.price),
   }));
 }
 
 export async function getGalleryImages() {
   const images = await prisma.galleryImage.findMany({
     where: { active: true },
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
   });
 
-  return images.map(image => ({
+  return images.map((image) => ({
     id: image.id,
     title: image.title || null,
     imageUrl: image.imageUrl,
-    description: image.description || null
+    description: image.description || null,
   }));
 }
 
 export async function getTeamMembers() {
   const members = await prisma.teamMember.findMany({
     where: { active: true },
-    orderBy: { name: 'asc' },
+    orderBy: { name: "asc" },
   });
   return members;
 }
@@ -47,11 +46,24 @@ export async function getTeamMembers() {
 export async function getPromotions() {
   const promotions = await prisma.promotion.findMany({
     where: { active: true },
-    orderBy: { createdAt: 'desc' },
+    orderBy: { createdAt: "desc" },
   });
 
-  return promotions.map(promotion => ({
+  return promotions.map((promotion) => ({
     ...promotion,
-    discount: Number(promotion.discount)
+    discount: Number(promotion.discount),
   }));
-} 
+}
+
+export async function getServices() {
+  try {
+    const services = await prisma.service.findMany({
+      where: { active: true },
+      orderBy: { name: "asc" },
+    });
+    return services;
+  } catch (error) {
+    console.error("Error fetching services:", error);
+    return [];
+  }
+}
