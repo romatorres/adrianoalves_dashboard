@@ -38,7 +38,7 @@ export function ProductGrid({
   ) : (
     <section className="py-12 md:py-16 bg-white">
       <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-        <div className="mb-16 md:mb-20 flex flex-col items-center">
+        <div className="mb-12 md:mb-16 flex flex-col items-center">
           <h2 className="text-3xl md:text-6xl font-primary font-normal text-background mb-3">
             Shops
           </h2>
@@ -52,7 +52,7 @@ export function ProductGrid({
           </div>
         </div>
         <div className="flex justify-center">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             {products.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}

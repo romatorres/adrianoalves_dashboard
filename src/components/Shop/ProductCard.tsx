@@ -30,11 +30,11 @@ export function ProductCard({ product }: { product: Product }) {
           />
         </div>
       </div>
-      <div className="px-6 py-4">
+      <div className="px-4 py-4">
         <div className="font-bold text-xl mb-2">{product.name}</div>
         <p className="text-gray-700 text-base">{product.description}</p>
       </div>
-      <div className="flex justify-between items-center px-6 pt-4 pb-3">
+      <div className="flex justify-between items-center px-4 pt-4 pb-3">
         <span className="inline-block text-2xl font-bold text-background">
           {formattedPrice}
         </span>
