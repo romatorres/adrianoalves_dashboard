@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { Service, ServiceFormData } from "../types";
+import Input from "@/components/Ui/Input";
+import Textarea from "@/components/Ui/Textarea";
+import Button from "@/components/Ui/Button";
 
 interface ServiceFormProps {
   service?: Service;
@@ -54,36 +57,36 @@ export function ServiceForm({
       <div>
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-02"
         >
           Nome
         </label>
-        <input
+        <Input
           type="text"
           id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
           required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+          className="mt-1 block w-full"
         />
       </div>
 
       <div>
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-02"
         >
           Descrição
         </label>
-        <textarea
+        <Textarea
           id="description"
           name="description"
           value={formData.description}
           onChange={handleChange}
           rows={3}
           required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+          className="mt-1 block w-full rounded-md"
         />
       </div>
 
@@ -91,11 +94,11 @@ export function ServiceForm({
         <div>
           <label
             htmlFor="price"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-02"
           >
             Preço (R$)
           </label>
-          <input
+          <Input
             type="number"
             id="price"
             name="price"
@@ -104,18 +107,18 @@ export function ServiceForm({
             min="0"
             step="0.01"
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+            className="mt-1 block w-full"
           />
         </div>
 
         <div>
           <label
             htmlFor="duration"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-02"
           >
             Duração (minutos)
           </label>
-          <input
+          <Input
             type="number"
             id="duration"
             name="duration"
@@ -123,7 +126,7 @@ export function ServiceForm({
             onChange={handleChange}
             min="1"
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+            className="mt-1 block w-full"
           />
         </div>
       </div>
@@ -131,17 +134,17 @@ export function ServiceForm({
       <div>
         <label
           htmlFor="imageUrl"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-02"
         >
           URL da Imagem
         </label>
-        <input
+        <Input
           type="url"
           id="imageUrl"
           name="imageUrl"
           value={formData.imageUrl || ""}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+          className="mt-1 block w-full"
         />
       </div>
 
@@ -154,19 +157,22 @@ export function ServiceForm({
           onChange={handleChange}
           className="h-4 w-4 rounded border-gray-300 text-amber-600 focus:ring-amber-500"
         />
-        <label htmlFor="active" className="ml-2 block text-sm text-gray-700">
+        <label
+          htmlFor="active"
+          className="ml-2 block text-sm font-medium text-gray-02"
+        >
           Ativo
         </label>
       </div>
 
       <div className="flex justify-end">
-        <button
+        <Button
           type="submit"
           disabled={isLoading}
-          className="inline-flex justify-center rounded-md border border-transparent bg-amber-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 disabled:opacity-50"
+          className="inline-flex justify-center"
         >
-          {isLoading ? "Salvando..." : service ? "Atualizar" : "Criar"}
-        </button>
+          {isLoading ? "Salvando..." : service ? "Atualizar" : "Criar Serviço"}
+        </Button>
       </div>
     </form>
   );

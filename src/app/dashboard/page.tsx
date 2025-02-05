@@ -18,36 +18,38 @@ export default async function DashboardHome() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-6 text-background">Dashboard</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold text-gray-700">Produtos</h2>
-          <p className="text-3xl font-bold text-amber-600 mt-2">{products}</p>
+          <h2 className="text-lg font-semibold text-gray-01">Produtos</h2>
+          <p className="text-3xl font-bold text-background mt-2">{products}</p>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold text-gray-700">Serviços</h2>
-          <p className="text-3xl font-bold text-amber-600 mt-2">{services}</p>
+          <h2 className="text-lg font-semibold text-gray-01">Serviços</h2>
+          <p className="text-3xl font-bold text-background mt-2">{services}</p>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold text-gray-700">Equipe</h2>
-          <p className="text-3xl font-bold text-amber-600 mt-2">{team}</p>
+          <h2 className="text-lg font-semibold text-gray-01">Equipe</h2>
+          <p className="text-3xl font-bold text-background mt-2">{team}</p>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold text-gray-700">
+          <h2 className="text-lg font-semibold text-gray-01">
             Fotos na Galeria
           </h2>
-          <p className="text-3xl font-bold text-amber-600 mt-2">{gallery}</p>
+          <p className="text-3xl font-bold text-background mt-2">{gallery}</p>
         </div>
 
         <div className="bg-white p-6 rounded-lg shadow-md">
-          <h2 className="text-lg font-semibold text-gray-700">
+          <h2 className="text-lg font-semibold text-gray-01">
             Promoções Ativas
           </h2>
-          <p className="text-3xl font-bold text-amber-600 mt-2">{promotions}</p>
+          <p className="text-3xl font-bold text-background mt-2">
+            {promotions}
+          </p>
         </div>
       </div>
     </div>

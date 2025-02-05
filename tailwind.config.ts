@@ -23,13 +23,16 @@ export default {
       },
       colors: {
         primary: "#E2C244",
+        primary_hover: "#B09423",
         secondary: "#F5EBC3",
         background: "#0E0D05",
         black_secondary: "#171407",
+        price: "#b45309",
         gray: {
           "01": "#26272B",
           "02": "#4E525B",
           "03": "#838896",
+          "04": "#F9F9F9",
         },
         white: "#FAF3DC",
       },

@@ -3,6 +3,7 @@
 import { Product } from "../types";
 import { useState } from "react";
 import Image from "next/image";
+import Button from "@/components/Ui/Button";
 
 interface ProductListProps {
   products: Product[];
@@ -54,20 +55,22 @@ export function ProductList({
               className="rounded-lg object-cover"
             />
           </div>
-          <h3 className="text-lg font-medium text-gray-900">{product.name}</h3>
-          <p className="mt-1 text-sm text-gray-500">{product.description}</p>
+          <h3 className="text-lg font-medium text-Background">
+            {product.name}
+          </h3>
+          <p className="mt-1 text-sm text-gray-02">{product.description}</p>
           <div className="mt-2 space-y-1">
-            <div className="text-sm font-medium text-amber-600">
+            <div className="text-lg font-medium text-price">
               {new Intl.NumberFormat("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               }).format(product.price)}
             </div>
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-02">
               Estoque: {product.stock} unidades
             </div>
             {product.productCategory && (
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-02">
                 Categoria: {product.productCategory.name}
               </div>
             )}
@@ -84,19 +87,16 @@ export function ProductList({
             </span>
           </div>
           <div className="mt-4 flex justify-end space-x-2">
-            <button
-              onClick={() => onEdit(product)}
-              className="text-amber-600 hover:text-amber-900"
-            >
+            <Button onClick={() => onEdit(product)} variant="secondary_card">
               Editar
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => handleDelete(product.id)}
               disabled={deletingId === product.id}
-              className="text-red-600 hover:text-red-900 disabled:opacity-50"
+              variant="danger_card"
             >
               {deletingId === product.id ? "Excluindo..." : "Excluir"}
-            </button>
+            </Button>
           </div>
         </div>
       ))}

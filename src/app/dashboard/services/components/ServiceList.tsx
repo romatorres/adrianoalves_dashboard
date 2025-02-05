@@ -3,6 +3,7 @@
 import { Service } from "../types";
 import { useState } from "react";
 import Image from "next/image";
+import Button from "@/components/Ui/Button";
 
 interface ServiceListProps {
   services: Service[];
@@ -56,16 +57,18 @@ export function ServiceList({
               />
             </div>
           )}
-          <h3 className="text-lg font-medium text-gray-900">{service.name}</h3>
-          <p className="mt-1 text-sm text-gray-500">{service.description}</p>
+          <h3 className="text-lg font-medium text-background">
+            {service.name}
+          </h3>
+          <p className="mt-1 text-sm text-gray-02">{service.description}</p>
           <div className="mt-2 space-y-1">
-            <div className="text-sm font-medium text-amber-600">
+            <div className="text-lg font-medium text-price">
               {new Intl.NumberFormat("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               }).format(service.price)}
             </div>
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-gray-02">
               Duração: {service.duration} minutos
             </div>
           </div>
@@ -81,19 +84,17 @@ export function ServiceList({
             </span>
           </div>
           <div className="mt-4 flex justify-end space-x-2">
-            <button
-              onClick={() => onEdit(service)}
-              className="text-amber-600 hover:text-amber-900"
-            >
+            <Button onClick={() => onEdit(service)} variant="secondary_card">
               Editar
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => handleDelete(service.id)}
               disabled={deletingId === service.id}
-              className="text-red-600 hover:text-red-900 disabled:opacity-50"
+              className="disabled:opacity-50"
+              variant="danger_card"
             >
               {deletingId === service.id ? "Excluindo..." : "Excluir"}
-            </button>
+            </Button>
           </div>
         </div>
       ))}

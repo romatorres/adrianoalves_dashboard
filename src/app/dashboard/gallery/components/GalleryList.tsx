@@ -4,6 +4,7 @@ import { GalleryImage } from "../types";
 import { useState } from "react";
 import Image from "next/image";
 import { ImageModal } from "@/components/ImageModal/ImageModal";
+import Button from "@/components/Ui/Button";
 
 interface GalleryListProps {
   images: GalleryImage[];
@@ -89,19 +90,17 @@ export function GalleryList({
             </span>
           </div>
           <div className="mt-4 flex justify-end space-x-2">
-            <button
-              onClick={() => onEdit(image)}
-              className="text-amber-600 hover:text-amber-900"
-            >
+            <Button onClick={() => onEdit(image)} variant="secondary_card">
               Editar
-            </button>
-            <button
+            </Button>
+            <Button
               onClick={() => handleDelete(image.id)}
               disabled={deletingId === image.id}
-              className="text-red-600 hover:text-red-900 disabled:opacity-50"
+              className="disabled:opacity-50"
+              variant="danger_card"
             >
               {deletingId === image.id ? "Excluindo..." : "Excluir"}
-            </button>
+            </Button>
           </div>
         </div>
       ))}

@@ -2,19 +2,29 @@ import React from "react";
 import classNames from "classnames";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary" | "outline" | "danger";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "secondary_card"
+    | "outline"
+    | "danger"
+    | "danger_card";
   isLoading?: boolean;
 }
 
 const buttonVariants = {
   primary:
-    "bg-primary text-background hover:text-white hover:bg-background px-4 py-2 border rounded-lg duration-300",
+    "bg-primary text-background hover:bg-primary_hover border-none px-5 py-2 rounded-lg duration-100",
   secondary:
-    "bg-background text-white hover:text-white hover:bg-gray-01 px-4 py-2 border rounded-lg duration-300",
+    "bg-gray-02 text-white hover:text-white hover:bg-gray-01 px-5 py-2 border-none rounded-lg duration-100",
   outline:
-    "bg-transparent text-background hover:text-white hover:bg-gray-01 px-4 py-2 border border-background rounded-lg duration-300",
+    "bg-transparent text-background hover:text-white hover:bg-gray-01 px-5 py-2 border border-background rounded-lg duration-100",
   danger:
-    "bg-red-500 text-white border hover:bg-red-700 px-4 py-2 rounded-lg duration-300",
+    "bg-red-500 text-white border hover:bg-red-700 px-5 py-2 rounded-lg duration-100",
+  secondary_card:
+    "text-gray-01 font-medium hover:text-background px-1 py-1 border-none duration-200",
+  danger_card:
+    "text-red-500 font-medium hover:text-red-700 px-1 py-1 border-none duration-200",
 };
 
 const Button: React.FC<ButtonProps> = ({

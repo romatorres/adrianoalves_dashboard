@@ -3,6 +3,9 @@
 import { useState } from "react";
 import { Product, ProductFormData } from "../types";
 import { Category } from "../../categories/types";
+import Input from "@/components/Ui/Input";
+import Textarea from "@/components/Ui/Textarea";
+import Button from "@/components/Ui/Button";
 
 interface ProductFormProps {
   product?: Product;
@@ -54,36 +57,36 @@ export function ProductForm({
       <div>
         <label
           htmlFor="name"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-01"
         >
           Nome
         </label>
-        <input
+        <Input
           type="text"
           id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
           required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+          className="mt-1 block w-full"
         />
       </div>
 
       <div>
         <label
           htmlFor="description"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-02"
         >
           Descrição
         </label>
-        <textarea
+        <Textarea
           id="description"
           name="description"
           value={formData.description}
           onChange={handleChange}
           rows={3}
           required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+          className="mt-1 block w-full"
         />
       </div>
 
@@ -91,11 +94,11 @@ export function ProductForm({
         <div>
           <label
             htmlFor="price"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-02"
           >
             Preço (R$)
           </label>
-          <input
+          <Input
             type="number"
             id="price"
             name="price"
@@ -104,18 +107,18 @@ export function ProductForm({
             min="0"
             step="0.01"
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+            className="mt-1 block w-full"
           />
         </div>
 
         <div>
           <label
             htmlFor="stock"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-02"
           >
             Estoque
           </label>
-          <input
+          <Input
             type="number"
             id="stock"
             name="stock"
@@ -123,7 +126,7 @@ export function ProductForm({
             onChange={handleChange}
             min="0"
             required
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+            className="mt-1 block w-full"
           />
         </div>
       </div>
@@ -131,25 +134,25 @@ export function ProductForm({
       <div>
         <label
           htmlFor="imageUrl"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-02"
         >
           URL da Imagem
         </label>
-        <input
+        <Input
           type="url"
           id="imageUrl"
           name="imageUrl"
           value={formData.imageUrl}
           onChange={handleChange}
           required
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+          className="mt-1 block w-full"
         />
       </div>
 
       <div>
         <label
           htmlFor="categoryId"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-medium text-gray-02"
         >
           Categoria
         </label>
@@ -158,7 +161,7 @@ export function ProductForm({
           name="categoryId"
           value={formData.categoryId || ""}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-amber-500 focus:ring-amber-500"
+          className="mt-1 block px-3 py-2 w-full rounded-md bg-gray-04 text-background border-gray-300 focus:border-gray-03 focus:ring-gray-02"
         >
           <option value="">Selecione uma categoria</option>
           {categories.map((category) => (
@@ -184,13 +187,9 @@ export function ProductForm({
       </div>
 
       <div className="flex justify-end">
-        <button
-          type="submit"
-          disabled={isLoading}
-          className="inline-flex justify-center rounded-md border border-transparent bg-amber-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 disabled:opacity-50"
-        >
-          {isLoading ? "Salvando..." : product ? "Atualizar" : "Criar"}
-        </button>
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "Salvando..." : product ? "Atualizar" : "Criar Produto"}
+        </Button>
       </div>
     </form>
   );

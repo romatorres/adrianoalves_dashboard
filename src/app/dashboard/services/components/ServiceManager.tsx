@@ -5,6 +5,7 @@ import { ServiceForm } from "./ServiceForm";
 import { ServiceList } from "./ServiceList";
 import { Service, ServiceFormData } from "../types";
 import { createService, deleteService, updateService } from "../actions";
+import Button from "@/components/Ui/Button";
 
 interface ServiceManagerProps {
   initialServices: Service[];
@@ -64,13 +65,10 @@ export function ServiceManager({ initialServices }: ServiceManagerProps) {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold text-gray-900">Gerenciar Serviços</h1>
-        <button
-          onClick={() => setShowForm(true)}
-          className="bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700"
-        >
-          Adicionar Serviço
-        </button>
+        <h1 className="text-2xl font-bold text-background">
+          Gerenciar Serviços
+        </h1>
+        <Button onClick={() => setShowForm(true)}>Adicionar Serviço</Button>
       </div>
 
       {showForm ? (
@@ -81,7 +79,7 @@ export function ServiceManager({ initialServices }: ServiceManagerProps) {
             </h2>
             <button
               onClick={handleCloseForm}
-              className="text-gray-600 hover:text-gray-800"
+              className="text-background hover:text-gray-02"
             >
               ✕
             </button>

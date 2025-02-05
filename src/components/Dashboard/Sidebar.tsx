@@ -103,7 +103,7 @@ export function Sidebar() {
     <>
       {/* Mobile menu button */}
       <button
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-amber-600 text-white"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-primary text-white"
         onClick={toggleSidebar}
       >
         {isSidebarOpen ? (
@@ -116,7 +116,7 @@ export function Sidebar() {
       {/* Overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+          className="fixed inset-0 bg-background bg-opacity-50 z-40 lg:hidden"
           onClick={toggleSidebar}
         />
       )}
@@ -133,10 +133,10 @@ export function Sidebar() {
             <div className="flex items-center space-x-4">
               <UserImageUpload />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-gray-900 truncate">
+                <p className="text-sm font-medium text-background truncate">
                   {session?.user?.name || "Usuário"}
                 </p>
-                <p className="text-sm text-gray-500 truncate">
+                <p className="text-xs text-gray-01 truncate">
                   {session?.user?.role || "Administrador"}
                 </p>
               </div>
@@ -156,7 +156,7 @@ export function Sidebar() {
                     <div>
                       <button
                         onClick={() => toggleSubmenu(item.name)}
-                        className={`w-full flex items-center justify-between p-2 rounded-lg hover:bg-amber-100 text-gray-700`}
+                        className={`w-full flex items-center justify-between p-2 rounded-lg hover:bg-amber-100 text-gray-01`}
                       >
                         <div className="flex items-center">
                           <item.icon className="w-6 h-6 mr-2" />
@@ -178,8 +178,8 @@ export function Sidebar() {
                                   href={subItem.href}
                                   className={`flex items-center p-2 rounded-lg hover:bg-amber-100 ${
                                     isSubItemActive
-                                      ? "bg-amber-100 text-amber-600"
-                                      : "text-gray-700"
+                                      ? "bg-amber-100 text-background"
+                                      : "text-gray-01"
                                   }`}
                                   onClick={() => setIsSidebarOpen(false)}
                                 >
@@ -197,8 +197,8 @@ export function Sidebar() {
                       href={item.href!}
                       className={`flex items-center p-2 rounded-lg hover:bg-amber-100 ${
                         isActive
-                          ? "bg-amber-100 text-amber-600"
-                          : "text-gray-700"
+                          ? "bg-amber-100 text-background"
+                          : "text-gray-01"
                       }`}
                       onClick={() => setIsSidebarOpen(false)}
                     >

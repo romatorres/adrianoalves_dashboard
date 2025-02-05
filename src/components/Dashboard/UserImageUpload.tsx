@@ -65,7 +65,7 @@ export function UserImageUpload() {
 
   return (
     <div className="relative group">
-      <div className="relative w-14 h-14 rounded-full overflow-hidden bg-amber-100">
+      <div className="relative w-12 h-12 rounded-full overflow-hidden bg-amber-100">
         {session?.user?.image ? (
           <Image
             src={session.user.image}
